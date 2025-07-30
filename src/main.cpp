@@ -24,7 +24,7 @@ int main() {
     }
 
     // 2. Test OpenGL context
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Test", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Simple_Engine", nullptr, nullptr);
     if (!window) {
         glfwTerminate();
         std::cerr << "Window creation failed!" << std::endl;
