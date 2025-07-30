@@ -13,8 +13,9 @@
 //==================
 
 //make global shaders paths. this is for testing. 
-std::string VS_path = "Assets/Shaders/main.vert";
-std::string FS_path = "Assets/Shaders/main.frag";
+std::string VS_path = "../src/Assets/Shaders/main.vert";
+std::string FS_path = "../src/Assets/Shaders/main.frag";
+
 
 int main() {
     // 1. Test GLFW
@@ -49,8 +50,8 @@ int main() {
     //============
     //SHADER SETUP
     //============
-    //Shader basic_Shader;
-    //basic_Shader.setUpShader(VS_path,FS_path);//setup shader.
+    Shader basic_Shader;
+    basic_Shader.setUpShader(VS_path,FS_path);//setup shader.
 
      // 4. Test GLM
     glm::vec3 testVec(1.0f);

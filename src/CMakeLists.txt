@@ -7,7 +7,8 @@ project(basic_OPEN_GL_PROJECT)
 add_executable(${PROJECT_NAME}
         main.cpp
         header/object.hpp "object.cpp"
-        header/Shader.hpp "shader.cpp")
+        header/Shader.hpp "shader.cpp"
+        header/mesh.hpp "mesh.cpp")
 
 ## ImGui
 find_package(imgui CONFIG REQUIRED)
