@@ -44,3 +44,6 @@
 /bin
 /out
 /.vs
+
+# Visual Studio CMake settings
+CMakeSettings.json

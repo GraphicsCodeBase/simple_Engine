@@ -7,7 +7,7 @@
 #include "header/Shader.hpp"//for compiling shaders.
 //==================
 //  THINGS LEFT TO FINISH (for spinning cube)
-//  1. FINISH UP SHADER CLASS
+//  1. FINISH UP SHADER CLASS 
 //  2. MAKE BUFFERS FOR OBJECTS -> VBO and index buffer.
 //  3. CAMERA CLASS.
 //==================
