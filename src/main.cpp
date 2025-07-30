@@ -49,8 +49,8 @@ int main() {
     //============
     //SHADER SETUP
     //============
-    Shader basic_Shader;
-    basic_Shader.setUpShader(VS_path,FS_path);//setup shader.
+    //Shader basic_Shader;
+    //basic_Shader.setUpShader(VS_path,FS_path);//setup shader.
 
      // 4. Test GLM
     glm::vec3 testVec(1.0f);
