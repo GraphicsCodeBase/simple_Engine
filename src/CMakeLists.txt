@@ -8,7 +8,8 @@ add_executable(${PROJECT_NAME}
         main.cpp
         header/object.hpp "object.cpp"
         header/Shader.hpp "shader.cpp"
-        header/mesh.hpp "mesh.cpp")
+        header/mesh.hpp "mesh.cpp" "camera.cpp"
+        header/camera.hpp "camera.cpp")
 
 ## ImGui
 find_package(imgui CONFIG REQUIRED)

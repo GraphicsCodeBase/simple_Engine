@@ -5,17 +5,17 @@
 #include <fmt/core.h>
 #include <iostream>
 #include "header/Shader.hpp"//for compiling shaders.
+#include <vector>
 //==================
 //  THINGS LEFT TO FINISH (for spinning cube)
-//  1. FINISH UP SHADER CLASS 
-//  2. MAKE BUFFERS FOR OBJECTS -> VBO and index buffer.
+//  1. FINISH UP SHADER CLASS (done)
+//  2. MAKE BUFFERS FOR OBJECTS -> VBO and index buffer.(DONE)
 //  3. CAMERA CLASS.
 //==================
 
 //make global shaders paths. this is for testing. 
 std::string VS_path = "../src/Assets/Shaders/main.vert";
 std::string FS_path = "../src/Assets/Shaders/main.frag";
-
 
 int main() {
     // 1. Test GLFW
@@ -52,6 +52,27 @@ int main() {
     //============
     Shader basic_Shader;
     basic_Shader.setUpShader(VS_path,FS_path);//setup shader.
+    //============
+    //CREATE MESH
+    //============
+    std::vector<glm::vec3> positions = { { -1.0, -1.0, -1.0 },
+                                        { -1.0, -1.0, 1.0 },
+                                        { -1.0, 1.0, -1.0 },
+                                        { -1.0, 1.0, 1.0 },
+                                        { 1.0, -1.0, -1.0 },
+                                        { 1.0, -1.0, 1.0 },
+                                        { 1.0, 1.0, -1.0 },
+                                        { 1.0, 1.0, 1.0 } };
+    for (auto& pos : positions) {
+        pos *= 0.5f;
+    }
+
+    std::vector<uint32_t> indices = {
+        1, 7, 5, 1, 3, 7, 1, 4, 3, 1, 2, 4, 3, 8, 7, 3, 4, 8, 5, 7, 8, 5, 8, 6, 1, 5, 6, 1, 6, 2, 2, 6, 8, 2, 8, 4
+    };
+    for (auto& index : indices) {
+        index -= 1;
+    }
 
      // 4. Test GLM
     glm::vec3 testVec(1.0f);

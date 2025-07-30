@@ -3,6 +3,7 @@
 #include <string>
 #include <glad/glad.h>
 #include <vector>
+#include "mesh.hpp"
 using namespace glm;
 
 class object
@@ -29,6 +30,9 @@ class object
 						const std::vector<unsigned int>& indices);
 		void setShader(GLuint ShaderProgram);
 
+		//create mesh
+		void uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds);
+
 	private:
 
 		std::string objName;//string name for ID purporses.
@@ -45,4 +49,6 @@ class object
 		GLuint textureID;
 		GLuint shaderProgram;
 		size_t indexCount;
+		//mesh
+		mesh mesh;
 };

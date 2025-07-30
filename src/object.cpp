@@ -31,3 +31,8 @@ vec3 object::getRot()
 {
 	return rotation;
 }
+
+void object::uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds)
+{
+	mesh = mesh::mesh(verts, inds);// Reconstructs and uploads new data
+}
