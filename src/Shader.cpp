@@ -45,15 +45,15 @@ void Shader::use() const
     glUseProgram(programID);
 }
 //========================================
-//          UNIFORM SETTING FUNCTIONS 
+//      UNIFORM SETTING FUNCTIONS 
 /*
-            BASIC SHADER USE CASE.
+        BASIC SHADER USE CASE.
 
-            shader.use(); // Always before setting uniforms
+        shader.use(); // Always before setting uniforms
 
-            shader.setMat4("u_Model", modelMatrix);
-            shader.setVec3("u_LightPos", glm::vec3(0.0f, 10.0f, 5.0f));
-            shader.setFloat("u_Time", glfwGetTime());
+        shader.setMat4("u_Model", modelMatrix);
+        shader.setVec3("u_LightPos", glm::vec3(0.0f, 10.0f, 5.0f));
+        shader.setFloat("u_Time", glfwGetTime());
 */
 //========================================
 void Shader::setMat4(const std::string& name, const glm::mat4& value) const
@@ -93,6 +93,11 @@ void Shader::setFloat(const std::string& name, float value) const
     {
         std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
     }
+}
+//get shaderID.
+GLuint Shader::getShaderID()
+{
+    return programID;
 }
 
 //========================================

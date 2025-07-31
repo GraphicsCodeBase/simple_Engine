@@ -16,11 +16,12 @@ class object
 		//basic getters and setters
 		void setPosition(const vec3& pos);
 		void setScale(const vec3& scl);
-		void setRotation(const vec3& rot); // Euler angles for now
+		void setRotation(const float& rot); // Euler angles for now
 		vec3 getPos(); //get position
 		vec3 getScl(); //get scale
-		vec3 getRot(); //get rotation.
-
+		float getRot(); //get rotation.
+		//update model matrix 
+		void updateModelMatrix();
 		//to be implemented soon.
 		void update(float dt);
 		void render(const mat4& viewProj);
@@ -40,7 +41,7 @@ class object
 		//model attributes.
 		vec3 position;
 		vec3 scale;
-		vec3 rotation;
+		float rotation;
 		//model Matrix.
 		mat4 modelMatrix;
 

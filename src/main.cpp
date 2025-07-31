@@ -16,6 +16,7 @@
 //==================
 
 //make global shaders paths. this is for testing. 
+//apparently the path starts from the exe file path.
 std::string VS_path = "../src/Assets/Shaders/main.vert";
 std::string FS_path = "../src/Assets/Shaders/main.frag";
 
@@ -57,14 +58,15 @@ int main() {
     //============
     //CREATE MESH
     //============
+    //vertex positions.
     std::vector<glm::vec3> positions = { { -1.0, -1.0, -1.0 },
-                                        { -1.0, -1.0, 1.0 },
-                                        { -1.0, 1.0, -1.0 },
-                                        { -1.0, 1.0, 1.0 },
-                                        { 1.0, -1.0, -1.0 },
-                                        { 1.0, -1.0, 1.0 },
-                                        { 1.0, 1.0, -1.0 },
-                                        { 1.0, 1.0, 1.0 } };
+                                         { -1.0, -1.0, 1.0 },
+                                         { -1.0, 1.0, -1.0 },
+                                         { -1.0, 1.0, 1.0 },
+                                         { 1.0, -1.0, -1.0 },
+                                         { 1.0, -1.0, 1.0 },
+                                         { 1.0, 1.0, -1.0 },
+                                         { 1.0, 1.0, 1.0 } };
     for (auto& pos : positions) {
         pos *= 0.5f;
     }
@@ -75,7 +77,13 @@ int main() {
     for (auto& index : indices) {
         index -= 1;
     }
-
+    //make objects and pass into vtx and idx
+    object testObject;
+    testObject.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));//start at the origin.
+    testObject.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+    testObject.setRotation(0.0f);
+    testObject.loadMesh(positions, indices);
+    testObject.setShader(basic_Shader.getShaderID());
      // 4. Test GLM
     glm::vec3 testVec(1.0f);
     std::cout << "GLM test: " << testVec.x << std::endl;
@@ -91,12 +99,19 @@ int main() {
     // After GLAD initialization
     glClearColor(0.0f, 1.0f, 1.0f, 1.0f);  // Pure cyan (full green + blue
 
+    float lastTime = glfwGetTime();//record the last time.
     // 5. Main rendering loop (REPLACE YOUR EXISTING LOOP WITH THIS)
     while (!glfwWindowShouldClose(window)) {
         // Clear screen
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Render commands would go here (e.g., draw a triangle)
+        //get the delta time
+        float currentTime = glfwGetTime();
+        float dt = currentTime - lastTime;
+        lastTime = currentTime;//update last time.
+        testObject.update(dt);
+        testObject.render();
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
