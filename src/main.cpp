@@ -4,13 +4,15 @@
 #include <glm/glm.hpp>
 #include <fmt/core.h>
 #include <iostream>
-#include "header/Shader.hpp"//for compiling shaders.
 #include <vector>
+#include "header/Shader.hpp"//for compiling shaders.
+#include "header/Object.hpp"//object class.
 //==================
 //  THINGS LEFT TO FINISH (for spinning cube)
-//  1. FINISH UP SHADER CLASS (done)
-//  2. MAKE BUFFERS FOR OBJECTS -> VBO and index buffer.(DONE)
-//  3. CAMERA CLASS.
+//   1. string together the camera class into the object.
+//   2. pass in uniforms.
+//   3. pass in meshes.
+//   4. do lighting (maybe??) optional. 
 //==================
 
 //make global shaders paths. this is for testing. 
