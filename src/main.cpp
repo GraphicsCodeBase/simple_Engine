@@ -124,7 +124,7 @@ int main() {
         //set uniforms.
         basic_Shader.setMat4("uniform_m2w",testObject.getmodelMat());//model to world matrix
         basic_Shader.setMat4("uniform_vp",main_camera.getViewProj());//camera matrix.
-        basic_Shader.setVec3("uniform_color", glm::vec3(1.0f, 0.0f, 0.0f));//set to red for now.
+        basic_Shader.setVec4("uniform_color", glm::vec4(1.0f, 0.0f, 0.0f,0.0f));//set to red for now.
         testObject.render();
         //unbind shader
         basic_Shader.unUse();

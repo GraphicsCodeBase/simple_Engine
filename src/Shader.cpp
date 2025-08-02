@@ -86,6 +86,19 @@ void Shader::setVec3(const std::string& name, const glm::vec3& value) const
     }
 }
 
+void Shader::setVec4(const std::string& name, const glm::vec4& value) const
+{
+    GLint location = glGetUniformLocation(programID, name.c_str());
+    if (location != -1)
+    {
+        glUniform4fv(location, 1, glm::value_ptr(value));
+    }
+    else
+    {
+        std::cerr << "Warning: uniform '" << name << "' not found in shader program." << std::endl;
+    }
+}
+
 void Shader::setFloat(const std::string& name, float value) const
 {
     GLint location = glGetUniformLocation(programID, name.c_str());
