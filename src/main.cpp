@@ -9,9 +9,9 @@
 #include "header/Object.hpp"//object class.
 #include "header/camera.hpp"
 //==================
-//  THINGS LEFT TO FINISH (for spinning cube)
-//  1. fix errors (if there is any more ?)
-//  2. fix default constructor for mesh class issue 
+//  THINGS LEFT TO FINISH 
+//  1. go and study how skeletal animation works 
+//  2. start planning on how to implement the into opengl.
 //==================
 
 //make global shaders paths. this is for testing. 
