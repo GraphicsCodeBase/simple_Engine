@@ -1,5 +1,13 @@
 #include "header/mesh.hpp"
 
+mesh::mesh()
+{
+    // Safe default: no buffers generated yet.
+    vbo = 0;
+    ibo = 0;
+    vao = 0;
+}
+
 mesh::mesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds)
 	: vertices(verts), indices(inds)
 {

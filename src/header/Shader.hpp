@@ -11,11 +11,12 @@ class Shader
 	void setUpShader(const std::string& vertexPath, const std::string& fragmentPath);
 	//bind shader
 	void use() const;
+	void unUse() const;
 	// Uniform setters
 	void setMat4(const std::string& name, const glm::mat4& value) const;
 	void setVec3(const std::string& name, const glm::vec3& value) const;
 	void setFloat(const std::string& name, float value) const;
-
+	GLuint getShaderID();
 	private:
 		GLuint programID;
 

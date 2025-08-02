@@ -44,6 +44,10 @@ void Shader::use() const
 {
     glUseProgram(programID);
 }
+void Shader::unUse() const
+{
+    glUseProgram(0);  // <-- unbind here
+}
 //========================================
 //      UNIFORM SETTING FUNCTIONS 
 /*

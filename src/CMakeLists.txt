@@ -11,6 +11,8 @@ add_executable(${PROJECT_NAME}
         header/mesh.hpp "mesh.cpp" "camera.cpp"
         header/camera.hpp "camera.cpp")
 
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20) 
+
 ## ImGui
 find_package(imgui CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC imgui::imgui)

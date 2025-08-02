@@ -3,6 +3,27 @@
 
 //this is where i would define the functions in the object class of object.hpp.
 
+object::object()
+	: position(0.0f), scale(1.0f), rotation(0.0f),
+	modelMatrix(1.0f), VAO(0), VBO(0), EBO(0),
+	textureID(0), shaderProgram(0), indexCount(0)
+{
+	objName = "unnamed_object";
+
+	// Optional debug output
+	// std::cout << "Object created: " << objName << std::endl;
+}
+
+
+object::~object()
+{
+	// Delete GL resources if created
+	if (VBO) glDeleteBuffers(1, &VBO);
+	if (EBO) glDeleteBuffers(1, &EBO);
+	if (VAO) glDeleteVertexArrays(1, &VAO);
+	if (textureID) glDeleteTextures(1, &textureID);
+}
+
 //setting position
 void object::setPosition(const vec3& pos)
 {
@@ -33,6 +54,11 @@ float object::getRot()
 {
 	return rotation;
 }
+mat4 object::getmodelMat()
+{
+	return modelMatrix;
+}
+
 //create the model matrix 
 void object::updateModelMatrix()
 {
@@ -59,10 +85,15 @@ void object::update(float dt)
 
 void object::render()
 {
-	mesh.draw();
+	if (!glIsVertexArray(main_mesh.vao))
+	{
+		std::cerr << "Invalid VAO: " << main_mesh.vao << std::endl;
+	}
+
+	main_mesh.draw();
 }
 
 void object::uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds)
 {
-	mesh = mesh::mesh(verts, inds);// Reconstructs and uploads new data
+	main_mesh = mesh::mesh(verts, inds);// Reconstructs and uploads new data
 }

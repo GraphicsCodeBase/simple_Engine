@@ -5,7 +5,7 @@ class camera
 {
 	public:
 		//basic camera properties.
-		glm::vec3 position = {5, 5, 5 };
+		glm::vec3 position = {0.0f, 0.0f,-1.0f };
 		glm::vec3 direction = glm::normalize(glm::vec3(-1, -1, -1));
 		glm::vec3 cursor = {};
 
@@ -16,7 +16,7 @@ class camera
 
 		//update function to pass into the shaders.
 		void update(float dt, GLFWwindow* window, int display_w, int display_h);
-
+		glm::mat4 getViewProj();
 	private:
 
 		bool initialized = false; // used to set cursor position on first update

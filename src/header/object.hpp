@@ -20,16 +20,12 @@ class object
 		vec3 getPos(); //get position
 		vec3 getScl(); //get scale
 		float getRot(); //get rotation.
+		mat4 getmodelMat();
 		//update model matrix 
 		void updateModelMatrix();
 		//to be implemented soon.
 		void update(float dt);
-		void render(const mat4& viewProj);
-
-		//loading mesh into object.
-		void loadMesh(const std::vector<vec3>& vertices,
-						const std::vector<unsigned int>& indices);
-		void setShader(GLuint ShaderProgram);
+		void render();
 
 		//create mesh
 		void uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds);
@@ -51,5 +47,5 @@ class object
 		GLuint shaderProgram;
 		size_t indexCount;
 		//mesh
-		mesh mesh;
+		mesh main_mesh;
 };

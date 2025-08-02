@@ -59,3 +59,8 @@ void camera::update(float dt, GLFWwindow* window, int display_w, int display_h)
     // Update cursor position for next frame
     cursor_pos = glm::vec2((float)cursor_x, (float)cursor_y);
 }
+
+glm::mat4 camera::getViewProj()
+{
+    return viewProj;
+}

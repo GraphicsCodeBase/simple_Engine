@@ -7,12 +7,11 @@
 #include <vector>
 #include "header/Shader.hpp"//for compiling shaders.
 #include "header/Object.hpp"//object class.
+#include "header/camera.hpp"
 //==================
 //  THINGS LEFT TO FINISH (for spinning cube)
-//   1. string together the camera class into the object.
-//   2. pass in uniforms.
-//   3. pass in meshes.
-//   4. do lighting (maybe??) optional. 
+//  1. fix errors (if there is any more ?)
+//  2. fix default constructor for mesh class issue 
 //==================
 
 //make global shaders paths. this is for testing. 
@@ -50,6 +49,9 @@ int main() {
     std::cout << "GLFW Version: " << glfwGetVersionString() << std::endl;
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "====================" << std::endl << std::flush;
+    //get window width and height.
+    int display_w, display_h;
+    glfwGetFramebufferSize(window, &display_w, &display_h);
     //============
     //SHADER SETUP
     //============
@@ -77,14 +79,20 @@ int main() {
     for (auto& index : indices) {
         index -= 1;
     }
-    //make objects and pass into vtx and idx
+    //================
+    //  OBJECT SETUP
+    //================
     object testObject;
     testObject.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));//start at the origin.
     testObject.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
     testObject.setRotation(0.0f);
-    testObject.loadMesh(positions, indices);
-    testObject.setShader(basic_Shader.getShaderID());
-     // 4. Test GLM
+    testObject.uploadMesh(positions, indices);
+    //================
+    //  CAMERA SETUP 
+    //================
+    camera main_camera;
+
+    // 4. Test GLM
     glm::vec3 testVec(1.0f);
     std::cout << "GLM test: " << testVec.x << std::endl;
     // 5. Test ImGui
@@ -99,24 +107,32 @@ int main() {
     // After GLAD initialization
     glClearColor(0.0f, 1.0f, 1.0f, 1.0f);  // Pure cyan (full green + blue
 
-    float lastTime = glfwGetTime();//record the last time.
+    double lastTime = glfwGetTime();//record the last time.
     // 5. Main rendering loop (REPLACE YOUR EXISTING LOOP WITH THIS)
     while (!glfwWindowShouldClose(window)) {
         // Clear screen
         glClear(GL_COLOR_BUFFER_BIT);
-
         // Render commands would go here (e.g., draw a triangle)
+        basic_Shader.use(); //bind shader.
         //get the delta time
-        float currentTime = glfwGetTime();
-        float dt = currentTime - lastTime;
-        lastTime = currentTime;//update last time.
-        testObject.update(dt);
+        double currentTime = glfwGetTime();
+        double dt = currentTime - lastTime;
+        lastTime = currentTime;//update last time. 
+        //update camera
+        main_camera.update(static_cast<float>(dt),window,display_w,display_h);
+        testObject.update(static_cast<float>(dt));
+        //set uniforms.
+        basic_Shader.setMat4("uniform_m2w",testObject.getmodelMat());//model to world matrix
+        basic_Shader.setMat4("uniform_vp",main_camera.getViewProj());//camera matrix.
+        basic_Shader.setVec3("uniform_color", glm::vec3(1.0f, 0.0f, 0.0f));//set to red for now.
         testObject.render();
-
+        //unbind shader
+        basic_Shader.unUse();
         // Swap buffers and poll events
         glfwSwapBuffers(window);
         glfwPollEvents();
-
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
         // ESC key to close window
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
             break;

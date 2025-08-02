@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #platform specific settings.
 if(MSVC)
-    add_compile_options(/W4 /WX)  # Enable warnings as errors
+    add_compile_options(/W4)  # Enable warnings as errors
 else ()
     add_compile_options(-Wall -Wextra -Wpedantic -Werror)  # Enable warnings as errors
 endif()
