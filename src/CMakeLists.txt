@@ -9,7 +9,8 @@ add_executable(${PROJECT_NAME}
         header/object.hpp "object.cpp"
         header/Shader.hpp "shader.cpp"
         header/mesh.hpp "mesh.cpp" "camera.cpp"
-        header/camera.hpp "camera.cpp")
+        header/camera.hpp "camera.cpp" 
+        header/ModelLoader.hpp "ModelLoader.cpp")
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20) 
 
@@ -36,3 +37,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
 # fmt
 find_package(fmt CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
+
+#assimp
+find_package(assimp CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PUBLIC assimp::assimp)
