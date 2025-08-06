@@ -1,5 +1,7 @@
 #include "header/MeshLoader.hpp"
-
+//=====================
+//	MAIN PUBLIC FUNCTION.
+//=====================
 std::shared_ptr<object> MeshLoader::loadMesh(const std::string& filePath)
 {
 	//make an object
@@ -16,4 +18,17 @@ std::shared_ptr<object> MeshLoader::loadMesh(const std::string& filePath)
 		std::cerr << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
 		return tempObj; // return empty object
 	}
+}
+//=====================
+//	HELPER FUNCTIONS.
+//=====================
+void MeshLoader::proccessNode(aiNode* Node, const aiScene* scene, std::shared_ptr<object>& obj)
+{
+
+
+}
+
+mesh MeshLoader::proccessMesh(aiMesh* Mesh, const aiScene* scene)
+{
+	return mesh();
 }
