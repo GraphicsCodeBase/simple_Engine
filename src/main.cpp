@@ -10,8 +10,8 @@
 #include "header/camera.hpp"
 //==================
 //  THINGS LEFT TO FINISH 
-//  1. go and study how skeletal animation works 
-//  2. start planning on how to implement the into opengl.
+//  1. add a model loader from assimp
+//  2. bind it into the opengl renderer.
 //==================
 
 //make global shaders paths. this is for testing. 

@@ -10,7 +10,7 @@ add_executable(${PROJECT_NAME}
         header/Shader.hpp "shader.cpp"
         header/mesh.hpp "mesh.cpp" "camera.cpp"
         header/camera.hpp "camera.cpp" 
-        header/ModelLoader.hpp "ModelLoader.cpp")
+        header/MeshLoader.hpp  "MeshLoader.cpp")
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20) 
 
