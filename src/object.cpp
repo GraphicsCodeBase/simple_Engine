@@ -112,5 +112,5 @@ void object::uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<u
 //add mesh into the container of meshes.
 void object::addMesh(mesh InputMesh)
 {
-	meshes.push_back(InputMesh);
+	meshes.push_back(std::move(InputMesh));
 }

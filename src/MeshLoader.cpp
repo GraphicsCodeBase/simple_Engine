@@ -29,14 +29,12 @@ void MeshLoader::proccessNode(aiNode* Node, const aiScene* scene, std::shared_pt
 {
 	//find out how many meshes is in the current Node.
 	//for each node we proccess all the meshes.
+	// Process only meshes attached to this node
 	for (unsigned int i = 0; i < Node->mNumMeshes; i++)
 	{
 		unsigned int meshIndex = Node->mMeshes[i];
-		aiMesh* In_mesh = scene->mMeshes[meshIndex];
-		mesh ProccessedMesh = proccessMesh(In_mesh, scene);//helper function to procces mesh.
-
-		//add the mesh into the object container of meshes.
-		obj->addMesh(std::move(ProccessedMesh));
+		mesh inMesh = proccessMesh(scene->mMeshes[meshIndex], scene);
+		obj->addMesh(std::move(inMesh));
 	}
 	// **Recursive call for each child node**
 	for (unsigned int i = 0; i < Node->mNumChildren; i++)

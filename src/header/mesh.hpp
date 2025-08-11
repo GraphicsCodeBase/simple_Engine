@@ -29,7 +29,7 @@ public:
     mesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds);
     mesh(const std::vector<Vertex>& verts, const std::vector<uint32_t>& inds);//constructor overload.
     //move constructor.
-    mesh(mesh&& other)
+    mesh(mesh&& other) 
         : vao(other.vao), vbo(other.vbo), ibo(other.ibo),
         vertices(std::move(other.vertices)), fullVertices(std::move(other.fullVertices)),
         indices(std::move(other.indices))

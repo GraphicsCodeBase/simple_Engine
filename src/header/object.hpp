@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <glm/glm.hpp>
 #include <string>
@@ -11,7 +12,6 @@ class object
 	public:
 		object();//basic constructor.
 		~object();//clean up destructor.
-
 
 		//basic getters and setters
 		void setPosition(const vec3& pos);

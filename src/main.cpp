@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 #include "header/Shader.hpp"//for compiling shaders.
-#include "header/Object.hpp"//object class.
 #include "header/camera.hpp"
 #include "header/MeshLoader.hpp"
 //==================
@@ -19,7 +18,7 @@
 //apparently the path starts from the exe file path.
 std::string VS_path = "../src/Assets/Shaders/main.vert";
 std::string FS_path = "../src/Assets/Shaders/main.frag";
-std::string model_path = "Assets/Klee.fbx";
+std::string model_path = "Assets/klee_mdl.glb";
 int main() {
     // 1. Test GLFW
     if (!glfwInit()) {
@@ -85,7 +84,7 @@ int main() {
     //  MODEL LOADER
     //================
     MeshLoader loader;
-    loader.loadMesh(model_path);
+    
     //================
     //  OBJECT SETUP
     //================
@@ -94,6 +93,12 @@ int main() {
     testObject.setScale(glm::vec3(2.0f, 2.0f, 2.0f));
     testObject.setRotation(0.0f);
     testObject.uploadMesh(positions, indices);
+
+    //model object 
+    std::shared_ptr<object> secondObject = loader.loadMesh(model_path);
+    secondObject->setPosition(glm::vec3(10.0f, 0.0f, 0.0f));
+    secondObject->setScale(glm::vec3(2.0f, 2.0f, 2.0f));
+    secondObject->setRotation(0.0f);
     //================
     //  CAMERA SETUP 
     //================
@@ -132,7 +137,8 @@ int main() {
         basic_Shader.setMat4("uniform_m2w",testObject.getmodelMat());//model to world matrix
         basic_Shader.setMat4("uniform_vp",main_camera.getViewProj());//camera matrix.
         basic_Shader.setVec4("uniform_color", glm::vec4(1.0f, 0.0f, 0.0f,0.0f));//set to red for now.
-        testObject.render();
+        //testObject.render();
+        secondObject->renderObject();
         //unbind shader
         basic_Shader.unUse();
         // Swap buffers and poll events
