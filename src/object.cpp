@@ -93,7 +93,24 @@ void object::render()
 	main_mesh.draw();
 }
 
+void object::renderObject()
+{
+	//render all the meshes in the object.
+	for (auto& m : meshes)
+	{
+		m.bind();
+		m.draw();
+	}
+}
+
 void object::uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds)
 {
 	main_mesh = mesh::mesh(verts, inds);// Reconstructs and uploads new data
+}
+
+
+//add mesh into the container of meshes.
+void object::addMesh(mesh InputMesh)
+{
+	meshes.push_back(InputMesh);
 }

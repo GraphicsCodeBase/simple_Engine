@@ -26,10 +26,11 @@ class object
 		//to be implemented soon.
 		void update(float dt);
 		void render();
-
+		void renderObject();
 		//create mesh
 		void uploadMesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds);
-
+		//add meshes
+		void addMesh(mesh InputMesh);
 	private:
 
 		std::string objName;//string name for ID purporses.
@@ -48,4 +49,5 @@ class object
 		size_t indexCount;
 		//mesh
 		mesh main_mesh;
+		std::vector<mesh> meshes;
 };

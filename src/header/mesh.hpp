@@ -7,16 +7,32 @@
 #include <fmt/core.h>
 #include <iostream>
 #include <vector>
+
+//vertex mesh
+struct Vertex
+{
+    glm::vec3 Position;
+    glm::vec3 Normal;
+    glm::vec2 TexCoords;
+    glm::vec3 Tangent{};
+    glm::vec3 Bitangent{};
+    int BoneIDs[4] = { -1, -1, -1, -1 };
+    float Weights[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+};
+
+
 class mesh
 {
 public:
 
     mesh();
     mesh(const std::vector<glm::vec3>& verts, const std::vector<uint32_t>& inds);
+    mesh(const std::vector<Vertex>& verts, const std::vector<uint32_t>& inds);//constructor overload.
     //move constructor.
     mesh(mesh&& other)
         : vao(other.vao), vbo(other.vbo), ibo(other.ibo),
-        vertices(std::move(other.vertices)), indices(std::move(other.indices))
+        vertices(std::move(other.vertices)), fullVertices(std::move(other.fullVertices)), // <-- new
+        indices(std::move(other.indices))
     {
         other.vao = 0;
         other.vbo = 0;
@@ -34,6 +50,8 @@ public:
 
     std::vector<glm::vec3> vertices;
     std::vector<uint32_t> indices;
+    std::vector<Vertex> fullVertices;
+
 
     //mesh move assignment.
     mesh& operator=(mesh&& other) noexcept

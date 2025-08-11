@@ -18,6 +18,9 @@ std::shared_ptr<object> MeshLoader::loadMesh(const std::string& filePath)
 		std::cerr << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
 		return tempObj; // return empty object
 	}
+
+	proccessNode(scene->mRootNode, scene, tempObj);
+	return tempObj;//return object.
 }
 //=====================
 //	HELPER FUNCTIONS.
@@ -29,26 +32,53 @@ void MeshLoader::proccessNode(aiNode* Node, const aiScene* scene, std::shared_pt
 	for (unsigned int i = 0; i < Node->mNumMeshes; i++)
 	{
 		unsigned int meshIndex = Node->mMeshes[i];
-		aiMesh* mesh = scene->mMeshes[meshIndex];
-		proccessMesh(mesh, scene);//helper function to procces mesh.
+		aiMesh* In_mesh = scene->mMeshes[meshIndex];
+		mesh ProccessedMesh = proccessMesh(In_mesh, scene);//helper function to procces mesh.
+
+		//add the mesh into the object container of meshes.
+		obj->addMesh(std::move(ProccessedMesh));
+	}
+	// **Recursive call for each child node**
+	for (unsigned int i = 0; i < Node->mNumChildren; i++)
+	{
+		proccessNode(Node->mChildren[i], scene, obj);
 	}
 }
 
-mesh MeshLoader::proccessMesh(aiMesh* Mesh, const aiScene* scene)
+mesh MeshLoader::proccessMesh(aiMesh* aMesh, const aiScene* scene)
 {
-	std::vector<vec3> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<uint32> indices;
-	//basic idea for each mesh i would make an 
-	//object instance using the object class.
 
+	vertices.reserve(aMesh->mNumVertices);
+	indices.reserve(aMesh->mNumFaces * 3); // assuming triangulated
 
-	//loop through all the vertices.
+	// 1. Loop through vertices and extract position only (for now)
+	for (unsigned int i = 0; i < aMesh->mNumVertices; ++i)
+	{
+		Vertex vertex{};
+		vertex.Position = {
+			aMesh->mVertices[i].x,
+			aMesh->mVertices[i].y,
+			aMesh->mVertices[i].z
+		};
 
+		// Leave other vertex attributes (Normal, TexCoords, etc.) empty for now
 
+		vertices.push_back(vertex);
+	}
 
+	// 2. Loop through faces and get indices
+	for (unsigned int i = 0; i < aMesh->mNumFaces; ++i)
+	{
+		aiFace face = aMesh->mFaces[i];
+		// Each face is a triangle because of aiProcess_Triangulate flag
+		for (unsigned int j = 0; j < face.mNumIndices; ++j)
+		{
+			indices.push_back(face.mIndices[j]);
+		}
+	}
 
-	//loop over the faces (trianles.)
-
-
-	//return mesh.
+	// 3. Create and return your mesh object with positions + indices
+	return mesh(vertices, indices);
 }
