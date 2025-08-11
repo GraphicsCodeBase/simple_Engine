@@ -24,11 +24,31 @@ std::shared_ptr<object> MeshLoader::loadMesh(const std::string& filePath)
 //=====================
 void MeshLoader::proccessNode(aiNode* Node, const aiScene* scene, std::shared_ptr<object>& obj)
 {
-
-
+	//find out how many meshes is in the current Node.
+	//for each node we proccess all the meshes.
+	for (unsigned int i = 0; i < Node->mNumMeshes; i++)
+	{
+		unsigned int meshIndex = Node->mMeshes[i];
+		aiMesh* mesh = scene->mMeshes[meshIndex];
+		proccessMesh(mesh, scene);//helper function to procces mesh.
+	}
 }
 
 mesh MeshLoader::proccessMesh(aiMesh* Mesh, const aiScene* scene)
 {
-	return mesh();
+	std::vector<vec3> vertices;
+	std::vector<uint32> indices;
+	//basic idea for each mesh i would make an 
+	//object instance using the object class.
+
+
+	//loop through all the vertices.
+
+
+
+
+	//loop over the faces (trianles.)
+
+
+	//return mesh.
 }
