@@ -8,6 +8,7 @@
 #include "header/Shader.hpp"//for compiling shaders.
 #include "header/Object.hpp"//object class.
 #include "header/camera.hpp"
+#include "header/MeshLoader.hpp"
 //==================
 //  THINGS LEFT TO FINISH 
 //  1. add a model loader from assimp
@@ -18,7 +19,7 @@
 //apparently the path starts from the exe file path.
 std::string VS_path = "../src/Assets/Shaders/main.vert";
 std::string FS_path = "../src/Assets/Shaders/main.frag";
-
+std::string model_path = "Assets/Klee.fbx";
 int main() {
     // 1. Test GLFW
     if (!glfwInit()) {
@@ -79,6 +80,12 @@ int main() {
     for (auto& index : indices) {
         index -= 1;
     }
+
+    //================
+    //  MODEL LOADER
+    //================
+    MeshLoader loader;
+    loader.loadMesh(model_path);
     //================
     //  OBJECT SETUP
     //================

@@ -31,7 +31,7 @@ public:
     //move constructor.
     mesh(mesh&& other)
         : vao(other.vao), vbo(other.vbo), ibo(other.ibo),
-        vertices(std::move(other.vertices)), fullVertices(std::move(other.fullVertices)), // <-- new
+        vertices(std::move(other.vertices)), fullVertices(std::move(other.fullVertices)),
         indices(std::move(other.indices))
     {
         other.vao = 0;
